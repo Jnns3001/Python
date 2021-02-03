@@ -23,10 +23,6 @@ class Ninja:
             print("%s hat seine Waffe %s verloren" % (self.name, self.weapon.__class__))
             self.weapon = Hand(self)
             
-    
-        
-        
-        
     def hit(self, target):
         if self.owner.is_alive
         

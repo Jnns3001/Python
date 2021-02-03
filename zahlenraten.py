@@ -1,24 +1,40 @@
 import random
+import math
 
-zahl = random.randint(0, 20)
+def getvalidNumber():
+    while True:
+        guess = input("Give me a number!")
+        try:
+            guess = int(guess)
+        except ValueError:
+            print("That was not a number!")
+            continue
+        return guess
 
-print("Rate die Zahl!")
-n = 1
 
-while True:
-    print("das ist dein " + str(n) + ". Versuch")
-    zufall = (int(input()))
-    if n >= 5:
-        print("du hast zu viele Züge gebraucht!")
-        break
-    elif  zufall == zahl:
-        print("erraten!")
-        break
-    elif zufall > zahl :
-        print("Zu Hoch!")
-    else:
-        print("Zu Niedrig!")
-    n +=  1
+def guessingGame(x=1,y=20):
+    number = random.randint(x, y)
+    print("Guess a number between "+ str(x) + " and " + str(y) + "!")
+    n = 1
+    maxtries = int(math.log2(y-x))+1
+    print(maxtries)
 
-    
-    
+    while n <=maxtries:
+        print(str(n) + ". try")
+
+        guess = getvalidNumber()
+
+        if  guess == number:
+            print("you got it!")
+            return True
+        elif guess < number :
+            print("too small!")
+        else:
+            print("too big!")
+        n +=  1
+
+    return False
+
+        
+if __name__ == "__main__":
+    guessingGame()
