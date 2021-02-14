@@ -1,5 +1,5 @@
 #!/bin/python3
-import pygame
+import pygame2
 import random
 
 # configs

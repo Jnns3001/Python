@@ -8,7 +8,7 @@ def hanoi(count: int, src: int, mid: int, dest: int) ->  None:
     return
 
 def move(count: int, src: int, dest: int) -> None:
-    print("lege %s. Scheibe von %s zu %s") % (str(count), str(src), str(dest))
+    print("lege %s. Scheibe von %s zu %s") % str(count), str(src), str(dest)
     return
 
 print("lege die Anzahl an Scheiben fest.")
