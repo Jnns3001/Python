@@ -1,9 +1,13 @@
 def decode(message):
-    pass
+    
+
+
+
 
 if __name__ == "__main__":
-    encodedFile = open("morse.txt", "r")
+    encodedFile = open("PYTHON\morse_decoder\morse.txt", "r")
 
     encodedText = encodedFile.read()
+
 
     print(encodedText)
