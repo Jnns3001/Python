@@ -1,8 +1,10 @@
 import pygame
 import random
 
-import pygame
-import random
+tileSize = 1
+def getParameters(n):
+    tileSize = n
+
 
 def printMap(mapList):
     for row in mapList:
@@ -64,8 +66,7 @@ def emptyMap():
     return [[False for _ in range(mapHeight)] for _ in range(mapWidth)]
 
 
-def drawTile(tile, x, y):
-    screen.blit(tile, (x * tileSize, y * tileSize))
+def drawTile(tile, x, y): screen.blit(tile, (x * tileSize, y * tileSize))
 
 
 def demolisher(x,y) -> bool:
@@ -182,60 +183,3 @@ def step(x, y) -> bool:
 
     trail[x][y] = False
     return False
-
-# configs
-playerChar, wallChar, finishChar = 'p', '#', 'f'
-mapFile = 'PYTHON/maze-solver/map.txt'
-stepTime = 0  # in milliseconds
-tileSize = 16
-doRender = 1
-randomMap = 0
-
-
-walkSteps = 0
-demoSteps = 0
-
-# positions
-mapWidth, mapHeight = 50, 50
-playerX, playerY = 0, 0
-finishX, finishY = 0, 0
-
-# maps
-walls = None
-trail = None
-visited = None
-
-# images
-floorTile = loadTile("./PYTHON/maze-solver/img/floor.png")
-wallTile = loadTile('./PYTHON/maze-solver/img/wall.png')
-playerTile = loadTile('./PYTHON/maze-solver/img/player.png')
-trailTile = loadTile('./PYTHON/maze-solver/img/trail.png')
-finishTile = loadTile('./PYTHON/maze-solver/img/finish.png')
-visitedTile = loadTile('./PYTHON/maze-solver/img/visited.png')
-
-
-#init pygame
-pygame.init()
-pygame.display.set_caption('maze solver')
-screen = pygame.display.set_mode((tileSize * mapWidth, tileSize * mapHeight))
-
-trail = emptyMap()
-visited = emptyMap()
-
-#init maps
-if randomMap == 0:
-    loadMap()
-else:
-    generateMap()
-    print(demoSteps)
-
-#step(playerX, playerY)
-step(0, 0)
-render()
-print(walkSteps)
-
-# wait for window close when finished
-while True:
-    processEvents()
-    pygame.time.delay(100)
-    
