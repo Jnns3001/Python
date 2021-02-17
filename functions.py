@@ -48,3 +48,10 @@ def funk():
 
 def funk2():
     return 42
+
+
+def replace(message, index, length, replacement):
+    firstPart = message[:index]
+    secondPart = message[(index + length):]
+
+    return(firstPart + replacement + secondPart)
