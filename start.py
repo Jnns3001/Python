@@ -29,6 +29,9 @@ if __name__ == "__main__":
             text = map("Rebu Server\n")
         else:
             text = map(input("map name?")+ "\n")
+    else:
+        text = onlineMode("True\n")
+        text = map("Rebu Server\n")
 
     print (text)
 
