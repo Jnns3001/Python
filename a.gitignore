@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 *.nbc
 *.nci
+*.pyc
 
 
 # C extensions
