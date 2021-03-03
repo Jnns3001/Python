@@ -1,9 +1,6 @@
 import pygame
 import random
 
-import pygame
-import random
-
 def printMap(mapList):
     for row in mapList:
         for tile in row:
