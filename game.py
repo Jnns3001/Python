@@ -3,7 +3,7 @@ import random
 import abc
 
 class Ninja:
-    def __init__(self, name, health):
+    def __init__(self, name="unknown", health=100):
         self.name  = name
         self.health = health
         self.weapon = Hand(self)
@@ -24,8 +24,11 @@ class Ninja:
             self.weapon = Hand(self)
             
     def hit(self, target):
-        if self.owner.is_alive
+        if self.owner.is_alive:
+            pass
         
 class Sword(Weapon):
     def __init__(self, owner):
-        
+        pass
+
+player1 = Ninja("xing", 101)
