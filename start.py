@@ -13,7 +13,7 @@ def map(replacement):
 
 
 if __name__ == "__main__":
-    path = "C:\\Users\\Jannis.Laptop\\Desktop\\mc files\\Server\\Server 1.16.5 paper\\server.properties"
+    path = "C:\\Users\\Jannis\\Desktop\\mc files\\Server\\Server 1.16.5 paper\\server.properties"
     file = open(path)
     global text
     text = file.read()
