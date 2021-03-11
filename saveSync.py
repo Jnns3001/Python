@@ -6,14 +6,23 @@ from tabulate import tabulate
 #All Directories with MC saves
 dirs =  ("C:\\Users\\Jannis\\AppData\\Local\\MultiMC\\instances", "C:\\Users\\Jannis\\AppData\Roaming\\.minecraft", "C:\\Users\\Jannis\\Desktop\\mc_files\\globalSaves\\")
 
+class save:
+    def __init__(self, name, root) -> None:
+        self.name = name
+        self.root = root
+
+    def __str__(self):
+        return str(self.name, self.root)
+
+
 def getAllSaves(directory):
-    allRoots = []
+    saves = []
     for roots, subdirectories, files in os.walk(directory):
         for subdirectory in subdirectories:
             #get all "saves" dirs in dir
             if subdirectory == "saves":
                 for subroot, subsubdir, subfile in os.walk(os.path.join(roots, subdirectory)):
-                    # get path of all saves
+                    #get path of all saves
                     saveroot = subroot
                     slashsave = saveroot.find("saves\\")
                     name = saveroot[slashsave+6:]
@@ -21,8 +30,9 @@ def getAllSaves(directory):
                         cutoffstring = saveroot[slashsave+6:]
                         #check if it is a subdir
                         if cutoffstring.find("\\") < 0:
-                            allRoots.append((name, saveroot))
-    return allRoots
+                            n = save(name, saveroot)
+                            saves.append(n)
+    return saves
 
 
 def getValidInput(stop):
@@ -38,12 +48,11 @@ def getValidInput(stop):
 
 def getDecisions(duplicates, saves):
     returnQueue = []
-
     for duplicate in duplicates:
         times = 0
         optionQueue = []
         for save in saves:
-            if duplicate[0] == save[0]:
+            if duplicate[0] == saves[0]:
                 optionQueue.append(save)
                 times += 1
                 print(save)
@@ -52,34 +61,40 @@ def getDecisions(duplicates, saves):
     return returnQueue
 
 
-
 if __name__ == "__main__":
-    saves = []
+    all_saves = []
     names = []
     duplicates = []
-    singles = []
 
     #Get all saves
     for dir in dirs:
-        saves += getAllSaves(dir)
+        all_saves += getAllSaves(dir)
 
     #Get a list with all save names
-    for name, root in saves:
-        names.append(name)
+    for thissave in all_saves:
+        names.append(thissave.name)
 
     #get the names of the duplicates
     for n in names:
-        if n not in singles:
-            singles.append(n)
-        elif n in singles:
+        tempsingles = []
+        if n not in tempsingles:
+            tempsingles.append(n)
+        elif n in tempsingles:
             duplicates.append([n])
+
+    #get a good singles list
+    singles = names
+    for name in names:
+        if name in duplicates:
+            singles.remove(name)
+    
 
     if True:
         print("all saves")
-        print(tabulate(saves))
-        #print("\nsingles")
-        #print((singles))
+        print(all_saves)
+        print("\nnames")
+        print(names)
+        print("\nsingles")
+        print(singles)
         #print("\nduplicates")
         #print((duplicates))
-
-    print(getDecisions(duplicates, saves))
