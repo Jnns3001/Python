@@ -20,7 +20,7 @@ def getAllSaves(directory):
     saves = []
     for roots, subdirectories, files in os.walk(directory):
         for subdirectory in subdirectories:
-            #get all "saves" dirs in dir
+            #get all "saves" directories in dir
             if subdirectory == "saves":
                 for subroot, subsubdir, subfile in os.walk(os.path.join(roots, subdirectory)):
                     #get path of all saves
@@ -36,9 +36,9 @@ def getAllSaves(directory):
     return saves
 
 
-def getValidInput(stop):
+def getValidInput(message, stop):
     while True:
-        userdec = input("Wich version do you want to keep? (0;%i)" %(stop-1))
+        userdec = input(message + "(0;%i)" %(stop-1))
         try:
             userdec = int(userdec)
         except ValueError:
@@ -65,18 +65,17 @@ def getDecisions(duplicates:list, saves:list):
                 option_Queue.append(thissave)
                 times += 1
                 print(thissave.table)
-        userdec = getValidInput(times)
+        userdec = getValidInput("Wich version do you want to keep? ", times)
         return_Queue.append(option_Queue.pop(int(userdec)))
         for option in option_Queue:
             delete_Queue.append(option)
     return [return_Queue, delete_Queue]
 
 
-if __name__ == "__main__":
-
+def saveToGlobalSaves(directories):
     #get all saves
     all_saves = []
-    for dir in dirs:
+    for dir in directories:
         some_saves = getAllSaves(dir)
         for saves in some_saves:
             all_saves.append(saves)
@@ -101,6 +100,7 @@ if __name__ == "__main__":
         if saves.name not in double_names:
             singles.append(saves)
 
+    #Printing All Saves
     print(tabulate(getNiceList(all_saves)))
 
     #get The Copy list
@@ -114,5 +114,10 @@ if __name__ == "__main__":
     #get the Delete list
     delete_list = decs[1]
 
+    #Printing Result
     print("\nCopy list:\n" + tabulate(getNiceList(copy_list)))
     print("\nDelete list:\n" + tabulate(getNiceList(delete_list)))
+
+
+if __name__ == "__main__":
+    saveToGlobalSaves(dirs)
