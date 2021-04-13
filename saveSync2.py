@@ -5,6 +5,8 @@ from tabulate import tabulate
 
 #All Directories with MC saves
 dirs =  ("C:\\Users\\Jannis\\AppData\\Local\\MultiMC\\instances", "C:\\Users\\Jannis\\AppData\Roaming\\.minecraft", "C:\\Users\\Jannis\\Desktop\\mc_files\\globalSaves\\")
+global_save_dir = "C:\\Users\\Jannis\\Desktop\\mc_files\\globalSaves\\saves\\"
+
 
 class save:
     def __init__(self, name, root) -> None:
@@ -16,7 +18,7 @@ class save:
         return self.name
 
 
-def getAllSaves(directory):
+def getSaves(directory):
     saves = []
     for roots, subdirectories, files in os.walk(directory):
         for subdirectory in subdirectories:
@@ -72,11 +74,30 @@ def getDecisions(duplicates:list, saves:list):
     return [return_Queue, delete_Queue]
 
 
+def deleteSaves(saves):
+    if saves != []:
+        print("\nDelete list:\n" + tabulate(getNiceList(delete_list)))
+        if int(input("Do you want to delete the Duplicates? (1/0)")) == 1:
+            for save in saves:
+                shutil.rmtree(save.root)
+            print("Deleted " + save.name)
+        print("deleting Done!")
+
+
+def moveSaves(saves, globalsavedir):
+    for save in saves:
+        #Check if Save already is in Globalsaves
+        if save.root.find("C:\\Users\\Jannis\\Desktop\\mc_files\\globalSaves\\") == -1:
+            output = shutil.move(save.root, globalsavedir, copy_function = shutil.copytree) 
+            print(output)
+    print("Moving Done!")
+
+
 def saveToGlobalSaves(directories):
     #get all saves
     all_saves = []
     for dir in directories:
-        some_saves = getAllSaves(dir)
+        some_saves = getSaves(dir)
         for saves in some_saves:
             all_saves.append(saves)
 
@@ -116,8 +137,20 @@ def saveToGlobalSaves(directories):
 
     #Printing Result
     print("\nCopy list:\n" + tabulate(getNiceList(copy_list)))
-    print("\nDelete list:\n" + tabulate(getNiceList(delete_list)))
+
+    
+    #Delete the Duplicates
+    deleteSaves(delete_list)
+    #Move the Saves
+    moveSaves(copy_list, global_save_dir)
+
+
+def loadFromGlobalSaves():
+    pass
+
+
 
 
 if __name__ == "__main__":
     saveToGlobalSaves(dirs)
+    loadFromGlobalSaves()
