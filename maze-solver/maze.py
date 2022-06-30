@@ -186,7 +186,7 @@ def saveMap():
 
 # configs
 playerChar, wallChar, finishChar = 'p', '#', 'f'
-mapFile = r'maze-solver\map.txt'
+mapFile = r'maze-solver/map.txt'
 stepTime = 0  # in milliseconds
 tileSize = 16
 doRender = 1
@@ -206,12 +206,12 @@ trail = None
 visited = None
 
 # images
-floorTile = loadTile(r"maze-solver\img\floor.png")
-wallTile = loadTile(r'maze-solver\img\wall.png')
-playerTile = loadTile(r'maze-solver\img\player.png')
-trailTile = loadTile(r'maze-solver\img\trail.png')
-finishTile = loadTile(r'maze-solver\img\finish.png')
-visitedTile = loadTile(r'maze-solver\img\visited.png')
+floorTile = loadTile(r"C:\Users\Jannis\PycharmProjects\Python\maze-solver\img\floor.png")
+wallTile = loadTile(r'C:\Users\Jannis\PycharmProjects\Python\maze-solver\img\wall.png')
+playerTile = loadTile(r'C:\Users\Jannis\PycharmProjects\Python\maze-solver\img\player.png')
+trailTile = loadTile(r'C:\Users\Jannis\PycharmProjects\Python\maze-solver\img\trail.png')
+finishTile = loadTile(r'C:\Users\Jannis\PycharmProjects\Python\maze-solver\img\finish.png')
+visitedTile = loadTile(r'C:\Users\Jannis\PycharmProjects\Python\maze-solver\img\visited.png')
 
 trail = emptyMap()
 visited = emptyMap()
